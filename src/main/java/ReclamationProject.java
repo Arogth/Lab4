@@ -11,31 +11,36 @@
  */
 public class ReclamationProject {
     /**
-    * @param a is a string.
-    * @param b is a string.
+    * @param firstInput is a string.
+    * @param secondInput is a string.
     * @return the factorial of input if it is valid, or FACTORIAL_INVALID if it is not.
     */
-    static String doit(final String a, final String b) {
+    static String doit(final String firstInput, final String secondInput) {
 
-        String a2 = a, b2 = b;
+        String longString = firstInput, shortString = secondInput;
 
 
-        if (a2.length() > b2.length()) {
-            String c = a2; // set c to a
+        if (longString.length() > shortString.length()) {
+            String swap = longString; // set c to a
 
-            a2 = b2;
-            b2 = c;
+            longString = shortString;
+            shortString = swap;
         }
 
         String r = "";
 
-        for (int i = 0; i < a2.length(); i++) {
-            for (int j = a2.length() - i; j > 0; j--) {
-                for (int k = 0; k < b2.length() - j; k++) {
+        for (int longStringPos = 0; longStringPos < longString.length(); longStringPos++) {
 
-                    if (a2.regionMatches(i, b2, k, j) && j > r.length()) {
+            for (int lettersChecked = longString.length() - longStringPos;
+                    lettersChecked > 0; lettersChecked--) {
 
-                        r = a2.substring(i, i + j);
+                for (int shotStringPos = 0; shotStringPos < shortString.length() - lettersChecked;
+                        shotStringPos++) {
+
+                    if (longString.regionMatches(longStringPos, shortString,
+                            shotStringPos, lettersChecked) && lettersChecked > r.length()) {
+
+                        r = longString.substring(longStringPos, longStringPos + lettersChecked);
                     }
                 }
             }
